@@ -2,6 +2,8 @@ import path from 'path'
 import dm from 'dm.dll'
 
 interface Actions {
+  noop (): void
+  home (): void
   enterIntoMysticPlace (): void
   selectDarkAbyss (): void
   selectKingLevel (): void
@@ -17,8 +19,10 @@ interface Position {
   y: number
 }
 
-let state: keyof Actions = 'enterIntoMysticPlace'
+type State = keyof Actions
 
+let state: State = 'enterIntoMysticPlace'
+let nextState: State = 'noop'
 let hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
 let hwnd = hwnds[0]
 
@@ -35,6 +39,18 @@ const move = (pos: Position, x = 0, y = 0) => dm.moveTo(pos.x + Math.floor(x / 2
 const click = () => dm.leftClick()
 
 const actions: Actions = {
+// tslint:disable-next-line: no-empty
+  noop () {},
+  home () {
+    let pos = fp('back.bmp', 0)
+    if (pos) {
+      move(pos)
+      click()
+    } else {
+      state = nextState
+      nextState = 'noop'
+    }
+  },
   enterIntoMysticPlace () {
     let pos = fp('mystic-place.bmp', 2)
     if (pos) {
@@ -76,10 +92,8 @@ const actions: Actions = {
           move(pos)
           break
         case 4:
-          dm.moveTo(45, 55)
-          click()
-          click()
-          state = 'enterIntoPackage'
+          state = 'home'
+          nextState = 'enterIntoPackage'
           break
         default:
           break
@@ -117,9 +131,8 @@ const actions: Actions = {
       move(pos, 34, 17)
       setTimeout(
         () => {
-          dm.moveTo(45, 55)
-          click()
-          state = 'enterIntoMysticPlace'
+          state = 'home'
+          nextState = 'enterIntoMysticPlace'
         },
         60000
       )
@@ -130,6 +143,7 @@ const actions: Actions = {
 
 setInterval(
   () => {
+    console.log(state)
     actions[state]()
   },
   3000
