@@ -1,0 +1,26 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint-config-standard"
+    ],
+    "rules": {
+      "space-within-parens": [
+        false,
+        0
+      ],
+      "whitespace": [
+        true,
+        "check-decl",
+        "check-operator",
+        "check-module",
+        "check-rest-spread",
+        "check-type",
+        "check-typecast",
+        "check-type-operator",
+        "check-preblock"
+      ]
+    },
+    "jsRules": {},
+    "rulesDirectory": []
+  }
+  

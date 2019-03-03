@@ -1,0 +1,29 @@
+{
+  "name": "ald-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc & node ./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxgjzftd/ald-script.git"
+  },
+  "keywords": [],
+  "author": "xxgjzftd <xxgjzftd@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xxgjzftd/ald-script/issues"
+  },
+  "homepage": "https://github.com/xxgjzftd/ald-script#readme",
+  "dependencies": {
+    "dm.dll": "^1.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.6",
+    "tslint": "^5.13.1",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.3.3333"
+  }
+}
