@@ -106,7 +106,7 @@ const actions: Actions = {
   selectPotion () {
     let pos = fp('potion.bmp', 2)
     if (pos) {
-      move(pos, 53, 60)
+      move(pos, 44, 47)
       click()
       state = 'usePotion'
     }
