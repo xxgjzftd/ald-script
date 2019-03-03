@@ -131,6 +131,8 @@ const actions: Actions = {
       move(pos, 34, 17)
       setTimeout(
         () => {
+          dm.moveTo(50, 60)
+          click()
           state = 'home'
           nextState = 'enterIntoMysticPlace'
         },
