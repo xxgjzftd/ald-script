@@ -22,14 +22,16 @@ interface Position {
 
 type State = keyof Actions
 
-const argv = minimist(process.argv, { alias: { s: 'state' }, default: { type: 'enterIntoMysticPlace' } })
+const argv = minimist(process.argv, { alias: { s: 'state', n: 'nextState' }, default: { state: 'enterIntoMysticPlace', nextState: 'noop' } })
 
-let initState = (argv.state as State)
+const initState = (argv.state as State)
+const initNextState = (argv.nextState as State)
 
 let state: State = initState
-let nextState: State = 'noop'
-let hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
-let hwnd = hwnds[0]
+let nextState: State = initNextState
+
+const hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
+const hwnd = hwnds[0]
 
 console.log(hwnds)
 
@@ -97,7 +99,7 @@ const actions: Actions = {
           move(pos)
           break
         case 4:
-          dm.capture(0, 0, 2000, 2000, 'screen.png')
+          dm.capture(0, 0, 2000, 2000, `${(new Date()).toLocaleTimeString()}.bmp`)
           state = 'home'
           nextState = 'enterIntoPackage'
           break
