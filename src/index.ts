@@ -49,13 +49,13 @@ const actions: Actions = {
 // tslint:disable-next-line: no-empty
   noop () {},
   home () {
-    let pos = fp('back.bmp', 0)
+    let pos = fp('mystic-place.bmp', 2)
     if (pos) {
-      move(pos)
-      click()
-    } else {
       state = nextState
       nextState = 'noop'
+    } else {
+      dm.moveTo(50, 60)
+      click()
     }
   },
   enterIntoMysticPlace () {
@@ -99,7 +99,7 @@ const actions: Actions = {
           move(pos)
           break
         case 4:
-          dm.capture(0, 0, 2000, 2000, `${(new Date()).toLocaleTimeString()}.bmp`)
+          dm.capture(0, 0, 2000, 2000, 'screen.bmp')
           state = 'home'
           nextState = 'enterIntoPackage'
           break
@@ -133,8 +133,6 @@ const actions: Actions = {
       state = 'usePotion'
       setTimeout(
         () => {
-          dm.moveTo(50, 60)
-          click()
           state = 'home'
           nextState = 'enterIntoMysticPlace'
         },
