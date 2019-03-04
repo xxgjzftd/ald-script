@@ -37,7 +37,7 @@ console.log(hwnds, hwnd)
 
 console.log(`set path ${dm.setPath(path.resolve('./data'))}`)
 
-console.log(`bind ${dm.bindWindow(hwnd, 'dx2', 'windows3', 'windows', 0)}`)
+console.log(`bind ${dm.bindWindow(hwnd, 'dx2', 'windows', 'windows', 0)}`)
 
 const fp = (name: string, dir: 0 | 1 | 2 | 3) => dm.findPic(0, 0, 2000, 2000, name, '000000', 0.8, dir)
 
