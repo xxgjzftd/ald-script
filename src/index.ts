@@ -31,13 +31,13 @@ let state: State = initState
 let nextState: State = initNextState
 
 const hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
-const hwnd = hwnds[0]
+const hwnd = dm.getWindow(hwnds[0], 1)
 
-console.log(hwnds)
+console.log(hwnds, hwnd)
 
 console.log(`set path ${dm.setPath(path.resolve('./data'))}`)
 
-console.log(`bind ${dm.dll.BindWindow(hwnd, 'dx2', 'windows3', 'windows', 0)}`)
+console.log(`bind ${dm.bindWindow(hwnd, 'dx2', 'windows3', 'windows', 0)}`)
 
 const fp = (name: string, dir: 0 | 1 | 2 | 3) => dm.findPic(0, 0, 2000, 2000, name, '000000', 0.8, dir)
 
@@ -54,7 +54,7 @@ const actions: Actions = {
       state = nextState
       nextState = 'noop'
     } else {
-      dm.moveTo(50, 60)
+      dm.moveTo(40, 20)
       click()
     }
   },
