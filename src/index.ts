@@ -97,6 +97,7 @@ const actions: Actions = {
           move(pos)
           break
         case 4:
+          dm.capture(0, 0, 2000, 2000, 'screen.png')
           state = 'home'
           nextState = 'enterIntoPackage'
           break
