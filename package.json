@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "ald": "./lib/index.js"
+  },
   "scripts": {
     "start": "tsc & node ./lib/index.js"
   },
@@ -18,9 +21,11 @@
   },
   "homepage": "https://github.com/xxgjzftd/ald-script#readme",
   "dependencies": {
-    "dm.dll": "^1.0.8"
+    "dm.dll": "^1.0.8",
+    "minimist": "^1.2.0"
   },
   "devDependencies": {
+    "@types/minimist": "^1.2.0",
     "@types/node": "^11.9.6",
     "tslint": "^5.13.1",
     "tslint-config-standard": "^8.0.1",

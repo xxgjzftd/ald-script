@@ -1,5 +1,6 @@
 import path from 'path'
 import dm from 'dm.dll'
+import minimist from 'minimist'
 
 interface Actions {
   noop (): void
@@ -21,7 +22,11 @@ interface Position {
 
 type State = keyof Actions
 
-let state: State = 'enterIntoMysticPlace'
+const argv = minimist(process.argv, { alias: { s: 'state' }, default: { type: 'enterIntoMysticPlace' } })
+
+let initState = (argv.state as State)
+
+let state: State = initState
 let nextState: State = 'noop'
 let hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
 let hwnd = hwnds[0]
@@ -30,7 +35,7 @@ console.log(hwnds)
 
 console.log(`set path ${dm.setPath(path.resolve('./data'))}`)
 
-console.log(`bind ${dm.dll.BindWindow(hwnd, 'dx2', 'windows', 'windows', 0)}`)
+console.log(`bind ${dm.dll.BindWindow(hwnd, 'dx2', 'windows3', 'windows', 0)}`)
 
 const fp = (name: string, dir: 0 | 1 | 2 | 3) => dm.findPic(0, 0, 2000, 2000, name, '000000', 0.8, dir)
 
@@ -123,12 +128,6 @@ const actions: Actions = {
       move(pos, 44, 47)
       click()
       state = 'usePotion'
-    }
-  },
-  usePotion () {
-    let pos = fp('use-potion.bmp', 0)
-    if (pos) {
-      move(pos, 34, 17)
       setTimeout(
         () => {
           dm.moveTo(50, 60)
@@ -136,8 +135,14 @@ const actions: Actions = {
           state = 'home'
           nextState = 'enterIntoMysticPlace'
         },
-        60000
+        90000
       )
+    }
+  },
+  usePotion () {
+    let pos = fp('use-potion.bmp', 0)
+    if (pos) {
+      move(pos, 34, 17)
       click()
     }
   }
