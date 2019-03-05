@@ -153,6 +153,11 @@ const actions: Actions = {
 setInterval(
   () => {
     console.log(state)
+    let pos = fp('close-notification.bmp', 1)
+    if (pos) {
+      move(pos, 46, 43)
+      click()
+    }
     actions[state]()
   },
   3000
