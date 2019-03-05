@@ -83,7 +83,7 @@ const actions: Actions = {
     }
   },
   challenge () {
-    let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|potion.bmp', 0)
+    let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|can-not-continue-flag.bmp', 3)
     if (pos) {
       switch (pos.index) {
         case 0:
@@ -99,8 +99,10 @@ const actions: Actions = {
           move(pos)
           break
         case 4:
-          state = 'home'
-          nextState = 'enterIntoPackage'
+          if (dm.findPic(300, 300, 2000, 2000, 'can-not-continue-flag.bmp', '000000', 0.8, 0)) {
+            state = 'home'
+            nextState = 'enterIntoPackage'
+          }
           break
         default:
           break
