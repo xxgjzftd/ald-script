@@ -11,6 +11,7 @@ interface Actions {
   noop (): void
   home (): void
   selectMainTask (): void
+  enterIntoReplicate (): void
   challenge (): void
 }
 
@@ -39,8 +40,77 @@ const initNextState = (argv.nextState as State)
 let state: State = initState
 let nextState: State = initNextState
 
+let moveTimer: NodeJS.Timeout | undefined
+
+type Dir = 'right' | 'left' | 'up' | 'down'
+
+const roleMove = (dir: Dir) => {
+  dm.dll.KeyPressChar(dir)
+
+  // dm.dll.KeyDownChar(dir)
+  // setTimeout(() => {
+  //   dm.dll.KeyUpChar(dir)
+  // }, 2000)
+}
+
+const moveToNext = (next: Position) => {
+
+  moveTimer = setInterval(
+    () => {
+      let pos = dm.findColor(0, 0, 2000, 560, '00ff0e', 0.8, 0)
+      if (pos) {
+        if (next.x > pos.x + 50) {
+          roleMove('right')
+        } else {
+          roleMove('left')
+        }
+        if (next.y > pos.y) {
+          roleMove('down')
+        } else {
+          roleMove('up')
+        }
+      } else {
+        let dir: Dir
+        let random = Math.random()
+        if (random > 0.75) {
+          dir = 'right'
+        } else if (random > 0.5) {
+          dir = 'left'
+        } else if (random > 0.25) {
+          dir = 'up'
+        } else {
+          dir = 'down'
+        }
+        roleMove(dir)
+      }
+
+    },
+    300
+  )
+
+}
+
+const keys = ['x', 'a', 's', 'd', 'f', 'g', 'h', 'q', 'w', 'e', 'r', 't']
+
+let figthTimer: NodeJS.Timeout | undefined
+
+const fight = () => {
+  let i = 0
+
+  figthTimer = setInterval(
+    () => {
+      let dir = Math.random() > 0.5 ? 'right' : 'left'
+      dm.dll.KeyPressChar(dir)
+      dm.dll.KeyPressChar('x')
+      let key = keys[(i++) % 5]
+      dm.dll.KeyPressChar(key)
+    },
+    300
+  )
+}
+
 const actions: Actions = {
-  noop () {},
+  noop () { },
   home () {
     let pos = fp('mystic-place.bmp', 2)
     if (pos) {
@@ -60,7 +130,7 @@ const actions: Actions = {
           break
         case 1:
           move(pos, 28, 28)
-          state = 'challenge'
+          state = 'enterIntoReplicate'
           break
         default:
           break
@@ -71,26 +141,60 @@ const actions: Actions = {
     move({ x: 50, y: 170 })
     click()
   },
-  challenge () {
-    let pos = fp('forward.bmp|boss.bmp', 3)
+  enterIntoReplicate () {
+    let pos = fp('start-challenge-workaround.bmp', 3)
     if (pos) {
-
+      move(pos, 140, 120)
+      click()
+      state = 'challenge'
     }
   },
-  moveToNext () {
+  challenge () {
+    let pos = dm.findPic(0, 120, 2000, 560, 'right-entrance.bmp|forward.bmp|boss-new.bmp|entrance-new.bmp', '000000', 0.8, 0)
+    // let pos = dm.findColor(0, 120, 2000, 560, 'fe3a01|e2e29c|aaffff', 1, 0)
+    if (pos) {
+      clearInterval(figthTimer!)
+      figthTimer = undefined
+      clearInterval(moveTimer!)
+      moveTimer = undefined
 
+      moveToNext(pos)
+    } else if (!figthTimer) {
+      clearInterval(moveTimer!)
+      moveTimer = undefined
+      fight()
+    }
   }
+
+}
+
+let timer: NodeJS.Timeout
+
+const start = () => {
+  timer = setInterval(
+    () => {
+      console.log(state)
+      actions[state]()
+    },
+    3000
+  )
 }
 
 setInterval(
   () => {
-    console.log(state)
     let pos = fp('close-notification.bmp', 1)
     if (pos) {
       move(pos, 46, 43)
       click()
     }
-    actions[state]()
   },
-  3000
+  30 * 60 * 1000
 )
+
+const stop = () => {
+  clearInterval(timer)
+}
+
+console.log(stop)
+
+start()
