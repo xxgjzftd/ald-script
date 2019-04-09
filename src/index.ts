@@ -16,7 +16,7 @@ interface Actions {
 }
 
 interface Position {
-  x: number,
+  x: number
   y: number
 }
 

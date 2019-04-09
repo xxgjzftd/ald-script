@@ -61,10 +61,10 @@ const skipPos = {
 
 // 点2次？
 
-const getPosFromIndex = (roleIndex: number[]) => {
-  data[roleIndex[0]]
-}
+// const getPosFromIndex = (roleIndex: number[]) => {
+//   data[roleIndex[0]]
+// }
 
-const createRole = roleIndex => {
+// const createRole = roleIndex => {
 
-}
+// }
