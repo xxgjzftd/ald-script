@@ -179,6 +179,17 @@ setInterval(
   3000
 )
 
+setInterval(
+  () => {
+    let pos = fp('close-notification.bmp', 1)
+    if (pos) {
+      move(pos, 46, 43)
+      click()
+    }
+  },
+  30 * 60 * 1000
+)
+
 process.on(
   'exit',
   (code) => {
