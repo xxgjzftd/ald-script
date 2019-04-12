@@ -140,6 +140,19 @@ const actions: Actions = {
       setTimeout(() => {
         dm.moveTo(974, 345)
         click()
+        let timer = setInterval(
+          () => {
+            dm.moveTo(974, 345)
+            click()
+          },
+          500
+        )
+        setTimeout(
+          () => {
+            clearInterval(timer)
+          },
+          5000
+        )
       }, 5000)
       return
     }
