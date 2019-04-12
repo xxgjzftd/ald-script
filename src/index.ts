@@ -95,12 +95,19 @@ const actions: Actions = {
         case 2:
         case 3:
           move(pos)
-          state = 'noop'
           setTimeout(
             () => {
-              state = 'challenge'
+              if (state === 'challenge') {
+                state = 'noop'
+                setTimeout(
+                () => {
+                  state = 'challenge'
+                },
+                1 * 60 * 1000
+              )
+              }
             },
-            2 * 60 * 1000
+            15 * 1000
           )
           break
         case 4:
@@ -124,6 +131,30 @@ const actions: Actions = {
           break
       }
       click()
+      return
+    }
+
+    let lastAbyssBossFlag = dm.findPic(240, 70, 768, 135, 'last.bmp', '000000', 0.8, 0)
+
+    if (lastAbyssBossFlag) {
+      setTimeout(() => {
+        dm.moveTo(974, 345)
+        click()
+      }, 5000)
+      return
+    }
+
+    let passAbyssFlag = dm.findPic(444, 76, 680, 182, 'pass-abyss-flag-1.bmp|pass-abyss-flag-2.bmp', '000000', 0.8, 0)
+    if (passAbyssFlag) {
+      dm.moveTo(860, 30)
+      click()
+      setTimeout(
+        () => {
+          dm.moveTo(380, 460)
+          click()
+        },
+        3000
+      )
     }
   },
   enterIntoPackage () {
