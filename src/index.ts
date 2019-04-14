@@ -103,7 +103,7 @@ const actions: Actions = {
                 () => {
                   state = 'challenge'
                 },
-                1 * 60 * 1000
+                30 * 1000
               )
               }
             },
