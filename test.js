@@ -35,4 +35,4 @@ const click = () => dm.leftClick()
 
 // console.log(dm.findPic(0, 120, 2000, 560, 'right-entrance.bmp', '000000', 0.8, 2))
 
-console.log(fp('potion-new.bmp', 2))
+console.log(fp('potion.bmp', 2))
