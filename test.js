@@ -33,4 +33,6 @@ const click = () => dm.leftClick()
 
 // console.log(dm.findColor(0, 0, 2000, 560, '00ff0e', 0.8, 0))
 
-console.log(dm.findPic(0, 120, 2000, 560, 'right-entrance.bmp', '000000', 0.8, 2))
+// console.log(dm.findPic(0, 120, 2000, 560, 'right-entrance.bmp', '000000', 0.8, 2))
+
+console.log(fp('potion-new.bmp', 2))
