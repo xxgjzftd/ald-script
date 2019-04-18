@@ -1,13 +1,29 @@
 {
-  "name": "ald-script",
+  "name": "xxgjzftd-tool",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "bin": {
     "ald": "./lib/index.js"
   },
+  "build": {
+    "appId": "xxgjzftd.tool",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "electronDist": "electron-dist"
+  },
   "scripts": {
-    "start": "tsc & node ./lib/index.js"
+    "start": "tsc & electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -27,6 +43,8 @@
   "devDependencies": {
     "@types/minimist": "^1.2.0",
     "@types/node": "^11.9.6",
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0",
     "tslint": "^5.13.1",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.3.3333"

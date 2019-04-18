@@ -7,6 +7,12 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "electron builder",
+      "program": "${workspaceFolder}/node_modules/electron-builder/out/cli/cli.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "file",
       "program": "${file}",
       "args": [

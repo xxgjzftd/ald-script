@@ -36,3 +36,48 @@ const click = () => dm.leftClick()
 // console.log(dm.findPic(0, 120, 2000, 560, 'right-entrance.bmp', '000000', 0.8, 2))
 
 console.log(fp('potion.bmp', 2))
+console.log(fp('transfer.bmp', 2))
+
+// const notifier = require('node-notifier')
+
+// // notifier.notify('Message')
+
+// // notifier.notify({
+// //   title: 'My notification',
+// //   message: 'Hello, there!'
+// // })
+
+// notifier.notify(
+//   {
+//     title: 'My awesome title',
+//     message: 'Hello from node, Mr. User!',
+//     // icon: path.join(__dirname, 'coulson.jpg'), // Absolute path (doesn't work on balloons)
+//     // sound: true, // Only Notification Center or Windows Toasters
+//     wait: true // Wait with callback, until user action is taken against notification
+//   },
+//   function(...args) {
+//     // Response is response from notification
+//     console.log(args)
+//   }
+// )
+
+
+const WindowsToaster = require('node-notifier').WindowsToaster;
+ 
+var notifier = new WindowsToaster({
+  withFallback: true, // Fallback to Growl or Balloons?
+  customPath: void 0 // Relative/Absolute path if you want to use your fork of SnoreToast.exe
+});
+ 
+notifier.notify(
+  {
+    title: 'x', // String. Required
+    message: 'xx', // String. Required if remove is not defined
+    wait: true,
+    id: 10,
+    appName: 'Snore.DesktopToasts'
+  },
+  function(...args) {
+    console.log(args);
+  }
+);
