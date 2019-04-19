@@ -6,6 +6,8 @@ autoUpdater.logger = log
 autoUpdater.logger.transports.file.level = 'info'
 log.info('App starting...')
 
+let template: any[] = []
+
 let win: any
 
 function sendStatusToWindow (text: string) {
@@ -22,7 +24,7 @@ function createDefaultWindow () {
       win = null
     }
   )
-  win.loadURL(`file://${__dirname}/version.html#v${app.getVersion()}`)
+  win.loadFile('./src/index.html')
   return win
 }
 
@@ -63,12 +65,16 @@ autoUpdater.on(
     sendStatusToWindow('Update downloaded; will install in 5 seconds')
   }
 )
+
 app.on(
   'ready',
   () => {
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
     createDefaultWindow()
   }
 )
+
 app.on(
   'window-all-closed',
   () => {

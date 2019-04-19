@@ -31,7 +31,7 @@
     "start": "tsc & electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "publish": "npm run transpile & npm run dist & mkdir -p wwwroot & cp dist/*.json wwwroot/ & cp dist/*.yml wwwroot/ & cp dist/*.exe wwwroot/"
+    "publish": "npm run transpile & npm run dist & node publish.js"
   },
   "repository": {
     "type": "git",
