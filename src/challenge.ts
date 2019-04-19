@@ -81,7 +81,7 @@ const actions: Actions = {
     if (pos) {
       switch (pos.index) {
         case 0:
-          if (vm.businessman) {
+          if (vm.bussinessman) {
             stop()
             // tslint:disable-next-line: no-unused-expression
             new Notification('商人', { body: '出现了 ~~~' })
