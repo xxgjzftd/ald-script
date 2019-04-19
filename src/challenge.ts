@@ -83,7 +83,6 @@ const actions: Actions = {
         case 0:
           if (vm.businessman) {
             stop()
-            process.exit()
             // tslint:disable-next-line: no-unused-expression
             new Notification('商人', { body: '出现了 ~~~' })
             return
@@ -94,7 +93,6 @@ const actions: Actions = {
         case 1:
           if (fp('transfer.bmp', 2)) {
             stop()
-            process.exit()
             // tslint:disable-next-line: no-unused-expression
             new Notification('转移石', { body: '出现了 ~~~' })
             return
