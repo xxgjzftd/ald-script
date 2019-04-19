@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Electron Updater Example</title>
+</head>
+
+<body>
+  Current version: <span id="version">vX.Y.Z</span>
+  <div id="messages"></div>
+  <script>
+    let version = window.location.hash.substring(1)
+    document.getElementById('version').innerText = version
+    const { ipcRenderer } = require('electron')
+    ipcRenderer.on(
+      'message',
+      function (event, text) {
+        let container = document.getElementById('messages')
+        let message = document.createElement('div')
+        message.innerHTML = text
+        container.appendChild(message)
+      }
+    )
+  </script>
+</body>
+
+</html>

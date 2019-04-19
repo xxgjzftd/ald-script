@@ -7,6 +7,12 @@
     "ald": "./lib/index.js"
   },
   "build": {
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080/"
+      }
+    ],
     "appId": "xxgjzftd.tool",
     "win": {
       "target": [
@@ -21,9 +27,11 @@
     "electronDist": "electron-dist"
   },
   "scripts": {
+    "transpile": "tsc",
     "start": "tsc & electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "publish": "npm run transpile & npm run dist & mkdir -p wwwroot & cp dist/*.json wwwroot/ & cp dist/*.yml wwwroot/ & cp dist/*.exe wwwroot/"
   },
   "repository": {
     "type": "git",
@@ -38,13 +46,16 @@
   "homepage": "https://github.com/xxgjzftd/ald-script#readme",
   "dependencies": {
     "dm.dll": "^1.0.8",
-    "minimist": "^1.2.0"
+    "electron-log": "^3.0.5",
+    "electron-updater": "^4.0.6",
+    "fs-extra": "^7.0.1"
   },
   "devDependencies": {
     "@types/minimist": "^1.2.0",
     "@types/node": "^11.9.6",
     "electron": "^4.1.4",
     "electron-builder": "^20.39.0",
+    "http-server": "^0.11.1",
     "tslint": "^5.13.1",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.3.3333"

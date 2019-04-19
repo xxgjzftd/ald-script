@@ -1,18 +1,100 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="./vue.js"></script>
+  <title>xx</title>
+</head>
+
+<body>
+
+  <style>
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid gray;
+      border-radius: 10px;
+    }
+
+    .active {
+      border-color: aquamarine;
+    }
+
+    button {
+      float: right;
+      margin: 5px;
+      padding: 5px 15px;
+      border-radius: 10px;
+      background: mediumaquamarine;
+      border: 0;
+      color: white;
+      outline: none;
+      cursor: pointer;
+    }
+  </style>
+
+  <h1>xx</h1>
+
+  <div id="app">
+    <h5>state</h5>
+    <div class="tags">
+      <span class="tag" :class="{ active: s === state }" v-for="s of states" @click="state = s">{{ s }}</span>
+    </div>
+
+    <h5>next state</h5>
+    <div class="tags">
+      <span class="tag" :class="{ active: s === nextState }" v-for="s of states" @click="nextState = s">{{ s }}</span>
+    </div>
 
 
-    <title>xx</title>
-  </head>
-  <body>
-    <h1>xx</h1>
-  
-    <script>
-      require('../lib/challenge.js')
-    </script>
-  </body>
+    <h5>{{ running ? '运行中' : '暂停中' }}</h5>
+
+    <button @click="start">开始</button>
+    <button @click="stop">暂停</button>
+  </div>
+
+
+  <script>
+
+    let vm = new Vue(
+      {
+        el: '#app',
+        data: {
+          running: false,
+          states: ['noop', 'home', 'enterIntoMysticPlace', 'selectDarkAbyss', 'selectKingLevel', 'challenge', 'enterIntoPackage', 'selectConsumablesPanel', 'selectPotion', 'usePotion'],
+          state: 'enterIntoMysticPlace',
+          nextState: 'noop'
+        },
+        methods: {
+          start() {
+            this.running = true
+            data.start()
+          },
+          stop() {
+            this.running = false
+            data.stop()
+          }
+        }
+      }
+    )
+
+    const fs = require('fs-extra')
+    const path = require('path')
+
+    fs.copySync(path.resolve(__dirname, '../data'), path.resolve(__dirname, '../../data'))
+
+    const data= require('../lib/challenge.js')
+
+  </script>
+</body>
+
 </html>

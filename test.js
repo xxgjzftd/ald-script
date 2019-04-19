@@ -62,22 +62,3 @@ console.log(fp('transfer.bmp', 2))
 // )
 
 
-const WindowsToaster = require('node-notifier').WindowsToaster;
- 
-var notifier = new WindowsToaster({
-  withFallback: true, // Fallback to Growl or Balloons?
-  customPath: void 0 // Relative/Absolute path if you want to use your fork of SnoreToast.exe
-});
- 
-notifier.notify(
-  {
-    title: 'x', // String. Required
-    message: 'xx', // String. Required if remove is not defined
-    wait: true,
-    id: 10,
-    appName: 'Snore.DesktopToasts'
-  },
-  function(...args) {
-    console.log(args);
-  }
-);

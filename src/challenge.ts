@@ -1,6 +1,5 @@
 import path from 'path'
 import dm from 'dm.dll'
-import minimist from 'minimist'
 
 interface Actions {
   noop (): void
@@ -22,20 +21,15 @@ interface Position {
 
 type State = keyof Actions
 
-const argv = minimist(process.argv, { alias: { s: 'state', n: 'nextState' }, default: { state: 'enterIntoMysticPlace', nextState: 'noop' } })
-
-const initState = (argv.state as State)
-const initNextState = (argv.nextState as State)
-
-let state: State = initState
-let nextState: State = initNextState
+let state: State
+let nextState: State
 
 const hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
 const hwnd = dm.getWindow(hwnds[0], 1)
 
 console.log(hwnds, hwnd)
 
-console.log(`set path ${dm.setPath(path.resolve('./data'))}`)
+console.log(`set path ${dm.setPath(path.resolve(__dirname, '../../data'))}`)
 
 console.log(`bind ${dm.bindWindow(hwnd, 'dx2', 'windows', 'windows', 0)}`)
 
@@ -215,29 +209,30 @@ const actions: Actions = {
   }
 }
 
-setInterval(
-  () => {
-    console.log(state)
-    let pos = fp('close-notification.bmp', 1)
-    if (pos) {
-      move(pos, 46, 43)
-      click()
-    }
-    actions[state]()
-  },
-  3000
-)
+let timer: NodeJS.Timeout
 
-setInterval(
-  () => {
-    let pos = fp('close-notification.bmp', 1)
-    if (pos) {
-      move(pos, 46, 43)
-      click()
-    }
-  },
-  30 * 60 * 1000
-)
+const start = () => {
+  state = (vm.state as State)
+  nextState = (vm.nextState as State)
+  timer = setInterval(
+    () => {
+      console.log(state)
+      let pos = fp('close-notification.bmp', 1)
+      if (pos) {
+        move(pos, 46, 43)
+        click()
+      }
+      actions[state]()
+    },
+    3000
+  )
+}
+
+const stop = () => {
+  vm.state = state
+  vm.nextState = nextState
+  clearInterval(timer)
+}
 
 process.on(
   'exit',
@@ -246,3 +241,14 @@ process.on(
     console.log(`unbind ${dm.unBindWindow()}`)
   }
 )
+
+export {
+  hwnds,
+  hwnd,
+  fp,
+  move,
+  click,
+  actions,
+  start,
+  stop
+}
