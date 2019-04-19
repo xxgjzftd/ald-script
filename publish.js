@@ -4,7 +4,7 @@ fs.copySync(
   'dist',
   'wwwroot', {
     filter(src) {
-      return src.endsWith('exe') || src.endsWith('yml')
+      return src === 'dist' || src.endsWith('exe') || src.endsWith('yml') || src.endsWith('yaml')
     }
   }
 )
