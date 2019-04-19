@@ -4,7 +4,7 @@ const { app, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log')
 const { autoUpdater } = require('electron-updater')
 
-app.setUserModelId('xxgjzftd.tool')
+app.setAppUserModelId('xxgjzftd.tool')
 
 autoUpdater.logger = log
 autoUpdater.logger.transports.file.level = 'info'
