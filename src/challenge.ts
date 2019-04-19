@@ -40,8 +40,8 @@ const move = (pos: Position, x = 0, y = 0) => dm.moveTo(pos.x + Math.floor(x / 2
 const click = () => dm.leftClick()
 
 const actions: Actions = {
-// tslint:disable-next-line: no-empty
-  noop () {},
+  // tslint:disable-next-line: no-empty
+  noop () { },
   home () {
     let pos = fp('mystic-place.bmp', 2)
     if (pos) {
@@ -99,11 +99,11 @@ const actions: Actions = {
               if (state === 'challenge') {
                 state = 'noop'
                 setTimeout(
-                () => {
-                  state = 'challenge'
-                },
-                30 * 1000
-              )
+                  () => {
+                    state = 'challenge'
+                  },
+                  30 * 1000
+                )
               }
             },
             15 * 1000
@@ -212,6 +212,8 @@ const actions: Actions = {
 let timer: NodeJS.Timeout
 
 const start = () => {
+  // tslint:disable-next-line: no-unused-expression
+  new Notification('start', { body: 'start ~~~' })
   state = (vm.state as State)
   nextState = (vm.nextState as State)
   timer = setInterval(
@@ -229,6 +231,8 @@ const start = () => {
 }
 
 const stop = () => {
+  // tslint:disable-next-line: no-unused-expression
+  new Notification('stop', { body: 'stop ~~~' })
   vm.state = state
   vm.nextState = nextState
   clearInterval(timer)

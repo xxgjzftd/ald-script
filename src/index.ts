@@ -26,7 +26,6 @@ function createDefaultWindow () {
       win = null
     }
   )
-  // win.loadFile('./src/version.html')
   win.loadURL(`file://${path.resolve(__dirname, '../src/version.html')}#v${app.getVersion()}`)
   return win
 }
@@ -48,6 +47,7 @@ autoUpdater.on(
   'update-not-available',
   () => {
     sendStatusToWindow('Update not available.')
+    win.loadFile('./src/index.html')
   }
 )
 autoUpdater.on(
@@ -72,8 +72,8 @@ autoUpdater.on(
 app.on(
   'ready',
   () => {
-    const menu = Menu.buildFromTemplate(template)
-    Menu.setApplicationMenu(menu)
+    // const menu = Menu.buildFromTemplate(template)
+    // Menu.setApplicationMenu(menu)
     createDefaultWindow()
   }
 )
