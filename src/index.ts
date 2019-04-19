@@ -1,3 +1,5 @@
+const path = require('path')
+
 const { app, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log')
 const { autoUpdater } = require('electron-updater')
@@ -24,7 +26,8 @@ function createDefaultWindow () {
       win = null
     }
   )
-  win.loadFile('./src/version.html')
+  // win.loadFile('./src/version.html')
+  win.loadURL(`file://${path.resolve(__dirname, '../src/version.html')}#v${app.getVersion()}`)
   return win
 }
 
