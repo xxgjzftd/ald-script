@@ -24,7 +24,7 @@ function createDefaultWindow () {
       win = null
     }
   )
-  win.loadFile('./src/index.html')
+  win.loadFile('./src/version.html')
   return win
 }
 
