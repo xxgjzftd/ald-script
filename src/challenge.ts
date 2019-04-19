@@ -81,12 +81,23 @@ const actions: Actions = {
     if (pos) {
       switch (pos.index) {
         case 0:
-          move(pos)
+          if (vm.businessman) {
+            stop()
+            process.exit()
+            // tslint:disable-next-line: no-unused-expression
+            new Notification('商人', { body: '出现了 ~~~' })
+            return
+          } else {
+            move(pos)
+          }
           break
         case 1:
           if (fp('transfer.bmp', 2)) {
-            console.log('出现了 ~~~')
+            stop()
             process.exit()
+            // tslint:disable-next-line: no-unused-expression
+            new Notification('转移石', { body: '出现了 ~~~' })
+            return
           } else {
             move(pos, 34, 33)
           }
@@ -212,8 +223,6 @@ const actions: Actions = {
 let timer: NodeJS.Timeout
 
 const start = () => {
-  // tslint:disable-next-line: no-unused-expression
-  new Notification('start', { body: 'start ~~~' })
   state = (vm.state as State)
   nextState = (vm.nextState as State)
   timer = setInterval(
@@ -231,8 +240,6 @@ const start = () => {
 }
 
 const stop = () => {
-  // tslint:disable-next-line: no-unused-expression
-  new Notification('stop', { body: 'stop ~~~' })
   vm.state = state
   vm.nextState = nextState
   clearInterval(timer)

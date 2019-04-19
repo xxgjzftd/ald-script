@@ -55,6 +55,12 @@
       <span class="tag" :class="{ active: s === nextState }" v-for="s of states" @click="nextState = s">{{ s }}</span>
     </div>
 
+    <h5>bussinessman</h5>
+    <div class="tags">
+      <span class="tag" :class="{ active: bussinessman }" @click="bussinessman = true">是</span>
+      <span class="tag" :class="{ active: !bussinessman }" @click="bussinessman = false">否</span>
+    </div>
+
 
     <h5>{{ running ? '运行中' : '暂停中' }}</h5>
 
@@ -72,7 +78,8 @@
           running: false,
           states: ['noop', 'home', 'enterIntoMysticPlace', 'selectDarkAbyss', 'selectKingLevel', 'challenge', 'enterIntoPackage', 'selectConsumablesPanel', 'selectPotion', 'usePotion'],
           state: 'enterIntoMysticPlace',
-          nextState: 'noop'
+          nextState: 'noop',
+          bussinessman: false
         },
         methods: {
           start() {
