@@ -7,6 +7,8 @@ interface Actions {
   enterIntoMysticPlace (): void
   selectDarkAbyss (): void
   selectKingLevel (): void
+  enterIntoOther (): void
+  selectOther (): void
   challenge (): void
   enterIntoPackage (): void
   selectConsumablesPanel (): void
@@ -76,13 +78,24 @@ const actions: Actions = {
       state = 'challenge'
     }
   },
+  enterIntoOther () {
+    dm.dll.KeyPressChar('left')
+  },
+  selectOther () {
+    let pos = fp('other.bmp', 2)
+    if (pos) {
+      move(pos, 63, 16)
+      click()
+      state = 'selectKingLevel'
+    }
+  },
   challenge () {
     let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|can-not-continue-flag.bmp|gray-continue-challenge.bmp|gold-card.bmp', 3)
     if (pos) {
       switch (pos.index) {
         case 0:
           if (vm.bussinessman) {
-            stop()
+            vm.stop()
             // tslint:disable-next-line: no-unused-expression
             new Notification('商人', { body: '出现了 ~~~' })
             return
@@ -92,7 +105,7 @@ const actions: Actions = {
           break
         case 1:
           if (fp('transfer.bmp', 2)) {
-            stop()
+            vm.stop()
             // tslint:disable-next-line: no-unused-expression
             new Notification('转移石', { body: '出现了 ~~~' })
             return
@@ -203,18 +216,27 @@ const actions: Actions = {
       setTimeout(
         () => {
           state = 'home'
-          nextState = 'enterIntoMysticPlace'
+          switch (vm.loop) {
+            case 'abyss':
+              nextState = 'enterIntoMysticPlace'
+              break
+            default:
+              nextState = 'enterIntoOther'
+              break
+          }
         },
         90000
       )
     }
   },
   usePotion () {
-    let pos = fp('use-potion.bmp', 0)
-    if (pos) {
-      move(pos, 34, 17)
-      click()
-    }
+    // let pos = fp('use-potion.bmp', 0)
+    // if (pos) {
+    //   move(pos, 34, 17)
+    //   click()
+    // }
+    dm.moveTo(490, 110)
+    click()
   }
 }
 

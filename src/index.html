@@ -45,9 +45,14 @@
   <h1>xx</h1>
 
   <div id="app">
-    <h5>state</h5>
+    <h5>loop</h5>
     <div class="tags">
       <span class="tag" :class="{ active: s === state }" v-for="s of states" @click="state = s">{{ s }}</span>
+    </div>
+
+    <h5>state</h5>
+    <div class="tags">
+      <span class="tag" :class="{ active: l === loop }" v-for="l of loops" @click="loop = l">{{ l }}</span>
     </div>
 
     <h5>next state</h5>
@@ -78,11 +83,14 @@
           running: false,
           states: ['noop', 'home', 'enterIntoMysticPlace', 'selectDarkAbyss', 'selectKingLevel', 'challenge', 'enterIntoPackage', 'selectConsumablesPanel', 'selectPotion', 'usePotion'],
           state: 'enterIntoMysticPlace',
+          loops: ['abyss', 'other'],
+          loop: 'abyss',
           nextState: 'noop',
           bussinessman: false
         },
         methods: {
           start() {
+            if (this.running) return
             this.running = true
             data.start()
           },
