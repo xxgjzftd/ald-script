@@ -93,7 +93,7 @@ const actions: Actions = {
     }
   },
   challenge () {
-    let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|can-not-continue-flag.bmp|gray-continue-challenge.bmp|gold-card.bmp|start-challenge-1.bmp', 3)
+    let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|can-not-continue-flag.bmp|gray-continue-challenge.bmp|gold-card.bmp|start-challenge-workaround.bmp', 3)
     if (pos) {
       switch (pos.index) {
         case 0:
@@ -118,7 +118,6 @@ const actions: Actions = {
           break
         case 2:
         case 3:
-        case 7:
           move(pos)
           // setTimeout(
           //   () => {
@@ -151,6 +150,9 @@ const actions: Actions = {
           break
         case 6:
           move(pos, 91, 18)
+          break
+        case 7:
+          move(pos, 90, 50)
           break
         default:
           break
