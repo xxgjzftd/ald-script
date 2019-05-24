@@ -80,6 +80,9 @@ const actions: Actions = {
   },
   enterIntoOther () {
     dm.dll.KeyPressChar('left')
+    dm.dll.KeyPressChar('left')
+    dm.dll.KeyPressChar('left')
+    state = 'selectOther'
   },
   selectOther () {
     let pos = fp('other.bmp', 2)
@@ -90,7 +93,7 @@ const actions: Actions = {
     }
   },
   challenge () {
-    let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|can-not-continue-flag.bmp|gray-continue-challenge.bmp|gold-card.bmp', 3)
+    let pos = fp('businessman-dialog.bmp|goods-list-cancel.bmp|continue-challenge.bmp|start-challenge.bmp|can-not-continue-flag.bmp|gray-continue-challenge.bmp|gold-card.bmp|start-challenge-1.bmp', 3)
     if (pos) {
       switch (pos.index) {
         case 0:
@@ -115,21 +118,22 @@ const actions: Actions = {
           break
         case 2:
         case 3:
+        case 7:
           move(pos)
-          setTimeout(
-            () => {
-              if (state === 'challenge') {
-                state = 'noop'
-                setTimeout(
-                  () => {
-                    state = 'challenge'
-                  },
-                  30 * 1000
-                )
-              }
-            },
-            15 * 1000
-          )
+          // setTimeout(
+          //   () => {
+          //     if (state === 'challenge') {
+          //       state = 'noop'
+          //       setTimeout(
+          //         () => {
+          //           state = 'challenge'
+          //         },
+          //         30 * 1000
+          //       )
+          //     }
+          //   },
+          //   15 * 1000
+          // )
           break
         case 4:
           if (dm.findPic(300, 300, 2000, 2000, 'can-not-continue-flag.bmp', '000000', 0.8, 0)) {
