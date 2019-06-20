@@ -197,18 +197,21 @@ const actions: Actions = {
       return
     }
 
-    // let passAbyssFlag = dm.findPic(444, 76, 680, 182, 'pass-abyss-flag-1.bmp|pass-abyss-flag-2.bmp', '000000', 0.8, 0)
-    // if (passAbyssFlag) {
-    //   dm.moveTo(860, 30)
-    //   click()
-    //   setTimeout(
-    //     () => {
-    //       dm.moveTo(380, 460)
-    //       click()
-    //     },
-    //     3000
-    //   )
-    // }
+    if (!vm.businessman) {
+      let passAbyssFlag = dm.findPic(444, 76, 680, 182, 'pass-abyss-flag-1.bmp|pass-abyss-flag-2.bmp', '000000', 0.8, 0)
+      if (passAbyssFlag) {
+        dm.moveTo(860, 30)
+        click()
+        setTimeout(
+          () => {
+            dm.moveTo(380, 460)
+            click()
+          },
+          3000
+        )
+      }
+    }
+
   },
   enterIntoPackage () {
     let pos = fp('package.bmp', 3)
