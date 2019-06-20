@@ -6,6 +6,7 @@ interface Actions {
   home (): void
   enterIntoMysticPlace (): void
   selectDarkAbyss (): void
+  select60Abyss (): void
   selectKingLevel (): void
   enterIntoOther (): void
   selectOther (): void
@@ -59,11 +60,23 @@ const actions: Actions = {
     if (pos) {
       move(pos, 31)
       click()
-      state = 'selectDarkAbyss'
+      if (vm.loop === '60') {
+        state = 'select60Abyss'
+      } else if (vm.loop === 'abyss') {
+        state = 'selectDarkAbyss'
+      }
     }
   },
   selectDarkAbyss () {
     let pos = fp('dark-abyss.bmp', 2)
+    if (pos) {
+      move(pos, 63, 16)
+      click()
+      state = 'selectKingLevel'
+    }
+  },
+  select60Abyss () {
+    let pos = fp('60abyss.bmp', 2)
     if (pos) {
       move(pos, 63, 16)
       click()
