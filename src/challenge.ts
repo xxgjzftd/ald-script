@@ -240,6 +240,7 @@ const actions: Actions = {
           state = 'home'
           switch (vm.loop) {
             case 'abyss':
+            case '60':
               nextState = 'enterIntoMysticPlace'
               break
             default:
