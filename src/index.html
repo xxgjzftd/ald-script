@@ -60,10 +60,10 @@
       <span class="tag" :class="{ active: s === nextState }" v-for="s of states" @click="nextState = s">{{ s }}</span>
     </div>
 
-    <h5>bussinessman</h5>
+    <h5>businessman</h5>
     <div class="tags">
-      <span class="tag" :class="{ active: bussinessman }" @click="bussinessman = true">是</span>
-      <span class="tag" :class="{ active: !bussinessman }" @click="bussinessman = false">否</span>
+      <span class="tag" :class="{ active: businessman }" @click="businessman = true">是</span>
+      <span class="tag" :class="{ active: !businessman }" @click="businessman = false">否</span>
     </div>
 
 
@@ -86,7 +86,7 @@
           loops: ['abyss', 'other', '60'],
           loop: '60',
           nextState: 'noop',
-          bussinessman: false
+          businessman: false
         },
         methods: {
           start() {
