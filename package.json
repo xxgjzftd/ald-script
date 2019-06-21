@@ -31,10 +31,10 @@
   },
   "scripts": {
     "transpile": "tsc",
-    "start": "npm i & npm run publish & http-server wwwroot -p 1014",
+    "start": "npm i && npm run publish && http-server wwwroot -p 1014",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "publish": "npm run transpile & npm run dist & node publish.js"
+    "publish": "npm run transpile && npm run dist && node publish.js"
   },
   "repository": {
     "type": "git",
