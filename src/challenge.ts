@@ -30,8 +30,6 @@ let nextState: State
 const hwnds = dm.enumWindow('', '阿拉德', 1 + 2 + 4 + 8 + 16)
 const hwnd = dm.getWindow(hwnds[0], 1)
 
-console.log(`set size ${dm.dll.SetWindowSize(hwnd, 1024, 576)}`)
-
 console.log(hwnds, hwnd)
 
 console.log(`set path ${dm.setPath(path.resolve(__dirname, '../../data'))}`)
