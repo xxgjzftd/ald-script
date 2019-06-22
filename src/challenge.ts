@@ -271,7 +271,7 @@ const start = () => {
   timer = setInterval(
     () => {
       console.log(state)
-      let pos = fp('close-notification.bmp', 1)
+      let pos = fp('close-notification.bmp|close-notification1.bmp', 1)
       if (pos) {
         move(pos, 46, 43)
         click()
