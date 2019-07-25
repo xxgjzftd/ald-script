@@ -84,12 +84,14 @@ const actions: Actions = {
     }
   },
   selectKingLevel () {
-    let pos = fp('king-level.bmp', 2)
-    if (pos) {
-      move(pos, 39, 19)
-      click()
-      state = 'challenge'
-    }
+    // let pos = fp('king-level.bmp', 2)
+    // if (pos) {
+    //   move(pos, 39, 19)
+    //   click()
+    //   state = 'challenge'
+    // }
+    dm.moveTo(910, 130)
+    click()
   },
   enterIntoOther () {
     dm.dll.KeyPressChar('left')
