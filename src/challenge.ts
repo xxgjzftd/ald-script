@@ -92,6 +92,7 @@ const actions: Actions = {
     // }
     dm.moveTo(910, 130)
     click()
+    state = 'challenge'
   },
   enterIntoOther () {
     dm.dll.KeyPressChar('left')
